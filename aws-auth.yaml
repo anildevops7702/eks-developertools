@@ -1,0 +1,23 @@
+apiVersion: v1
+data:
+  mapRoles: |
+    - rolearn: arn:aws:iam::194722438687:role/eksctl-cicd-demo-mech-nodegroup-ng-NodeInstanceRole-ENIUJff5V2uo
+      username: system:node:{{EC2PrivateDNSName}}
+      groups:
+        - system:bootstrappers
+        - system:nodes
+    - rolearn: arn:aws:iam::194722438687:role/service-role/codebuild-royal-service-role
+      username: codebuild-royal-service-role
+      groups:
+        - system:masters
+    - rolearn: arn:aws:iam::194722438687:role/CodeBuildKubectlRole
+      username: CodeBuildKubectlRole
+      groups:
+        - system:masters
+  mapUsers: |
+    []
+kind: ConfigMap
+metadata:
+  name: aws-auth
+  namespace: kube-system
+
